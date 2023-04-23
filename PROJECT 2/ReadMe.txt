@@ -4,4 +4,4 @@ gcc -o main *.c
 ./main
 
 To save the output in the file, execute the binary file as
-./main >output.exe
+./main >output.txt
