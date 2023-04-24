@@ -12,10 +12,22 @@ struct process_s {
 
 typedef struct process_s process;
 
+typedef struct preemptive_process_s {
+	unsigned char pid;
+	float arrival_time;
+	float run_time;
+	unsigned char priority; 
+    float time_left;
+	float start_time;
+	float end_time;
+} preemptive_process;
+
 process * create_process(char pid, float arrival_time, float run_time, unsigned char priority);
 
 process * get_copy_of_process(process * proc);
 
-linked_list * generate_processes(int n);
+linked_list * generate_processes(int n, int counter);
+
+preemptive_process * create_preemptive_process(process* proc);
 
 #endif
