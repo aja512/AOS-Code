@@ -3,9 +3,9 @@
 // File: main.c
 */
 
+#include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
@@ -16,11 +16,7 @@
 int main(int argc, char *argv[]) 
 {
     srand(time(NULL));
-    //if (argc != 2) return 1;
-    //int num_customers = atoi(argv[1]);
-
-    //printf("Num Customers: %d\n", num_customers);
-
+    
     customer_queue_t *queue = create_customer_queue(10);
     print_customer_queue(queue);
 
