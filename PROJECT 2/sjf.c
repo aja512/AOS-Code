@@ -2,76 +2,62 @@
 #include <stdlib.h>
 #include "stat.h"
 #include "utility.h"
+#include <errno.h>
 
 process_stat * create_process_stat(process* proc);
+// process_stat: Output statistics, e.g. wait_time, turnaround_time, response_time, start_time, end_time, run_time;
 
-int compareRunTime(void * data1, void * data2) {
-	process_stat * ps1 = (process_stat *) data1;
-	process_stat * ps2 = (process_stat *) data2;
-	if(((process *)ps1->proc)->run_time < ((process *)ps2->proc)->run_time) {
-		return -1;
-	} else {
-		return 1;
-	}
+int shortestJobsFirst(void * data1, void * data2) {
+	// Compare service time of both processes
+	int flag = (((process *)((process_stat *)data1)->proc)->run_time < ((process *)((process_stat *)data2)->proc)->run_time) ? 0 : 1;
+	return flag;	// 0 if no sorting needed, 1 if processes must be switched
 }
 
-average_stats shortest_job_first_np(linked_list * processes) {
-	int t = 0;
+average_stats SJF_scheduler(linked_list *processes) {
+	int quanta = 0;
 
-	//Create Process Queue
-	queue *process_queue = (queue *)create_queue();
-	node * proc_ptr = processes->head;
-	if(processes->head == NULL) {
-		fprintf(stderr,"No Process to schedule\n");
+	node *current = processes->head;
+	if(current == NULL) perror("No processes in queue");	// If no processes are passed, throw error
+	process_stat *next_process = NULL;
+
+	// Generate scheduling queue for processes and linked list for final order
+	queue *scheduler_q = (queue *)create_queue();
+	linked_list *SJF_order = create_linked_list();
+
+	printf("\nShortest Job First (Non-Preemptive):\n");
+	while(quanta<100 || next_process!=NULL) {	// Iterate through 100 quanta, continue past only to finish last process
+		if(current != NULL) {
+			// Retreive all processes that arrive before current process has finished and before/during current quanta
+			while(current!=NULL && ((process *)(current->data))->arrival_time <= quanta) {	
+				process *data = (process *)(current->data);		// Retrieve data of current process
+				enqueue(scheduler_q,create_process_stat(data));	// Add current process to beginning of scheduler queue
+				sort(scheduler_q,shortestJobsFirst);			// SJF -> sort currently scheduled processes by service_time
+				current = current->next;
+			}
+		}
+		// If process not yet scheduled after current, take first one from SJF scheduling queue
+		if(next_process == NULL && scheduler_q->size > 0) next_process = (process_stat *)(dequeue(scheduler_q));
+
+		// Handle process that will run after current one
+		if(next_process != NULL) {
+			process *np = next_process->proc;
+			printf("%c", np->pid);		// Add to timechart of processes per quanta
+
+			// Set process start time to the current quanta
+			if(next_process->start_time == -1) next_process->start_time = quanta;
+			next_process->run_time++;
+
+			if(next_process->run_time >= np->run_time) {
+				next_process->end_time = quanta;
+				add_node(SJF_order,next_process);
+				next_process = NULL;	// Signify that process has finished
+			}
+		} 
+		else  printf("_");				// No process scheduled next, add nothing to timechart
+		quanta = quanta + 1;			// Continue to next quanta
 	}
-	//while process queue is not empty or time quanta is less than 100
-	process_stat * scheduled_process = NULL;
+	printf("\n");	// Add linebreak after timechart
 
-	linked_list *ll = create_linked_list();
-	printf("\nShortest Job First:\n");
-	while(t<100 || scheduled_process!=NULL) {
-		//check for incoming new process and enqueue it in the queue
-		if(proc_ptr != NULL) {
-			process * new_process = (process *)(proc_ptr->data);
-			while(proc_ptr!=NULL && new_process->arrival_time <= t) {
-				enqueue(process_queue,create_process_stat(new_process));
-				sort(process_queue,compareRunTime);
-				proc_ptr = proc_ptr->next;
-				if(proc_ptr!=NULL)
-					new_process = (process *)(proc_ptr->data);
-			}
-		}
-
-		//if there is no scheduled process, then check process queue and schedule it
-		if(scheduled_process == NULL && process_queue->size > 0) {
-			scheduled_process = (process_stat *) dequeue(process_queue);
-		}
-
-		if(scheduled_process != NULL) {
-			process * proc = scheduled_process->proc;
-
-			//add current running process to the time chart
-			printf("%c",proc->pid);
-
-			//update current processes stat
-			if(scheduled_process->start_time == -1) {
-				scheduled_process->start_time = t;
-			}
-			scheduled_process->run_time++;
-
-			if(scheduled_process->run_time >= proc->run_time) {
-				scheduled_process->end_time = t;
-				add_node(ll,scheduled_process);
-				scheduled_process = NULL;
-			}
-		} else {
-			printf("_");
-		}
-		//increase the time
-		t++;
-	}
-	printf("\n");
-
-	//Print Process Stat
-	return print_policy_stat(ll);
+	// Print statistics for SJF scheduled process list
+	return print_policy_stat(SJF_order);
 }
