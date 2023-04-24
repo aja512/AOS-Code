@@ -2,6 +2,7 @@
 #include "utility.h"
 #include "process.h"
 #include "stat.h"
+#include <time.h>
 
 void dispQueue(queue *q) {
 	node * ptr = (node *)q->head;
@@ -13,35 +14,35 @@ void dispQueue(queue *q) {
 				printf(">\n");
 }
 int main(int argc,char **argv) {
+	printf("BEGIN EXECUTION................................................................................\n");
+
 	int ctr = 0;
 	//Run 5 times
 	average_stats fcfs[6],sjf[6],srf[6],rr[6],hpfp[6],hpfnp[6],final[6];
 
 	while (ctr<5){
-		printf("\n******************* Round %d ***************************************\n", ctr);
-		printf("*********************************************************************************\n");
+		printf("\n\n------------------------------------------WORKLOAD %d------------------------------------------\n", ctr);
                 
 		//Linked List create processes
-		linked_list * processList = generate_processes(52);
+		printf("\n\nSEED: %lld\n", (long long)time(NULL) + (long long)ctr * 123456789);
+		linked_list * processList = generate_processes(52, ctr);
 		node * ptr = processList->head;
-		printf("-------------------------------------------------\n");
-		printf("Process ID | Arrival Time | Run Time | Priority |\n");
-		printf("-------------------------------------------------\n");
+		printf("-----------------------------------------------------------------------------------------------\n");
+		printf("\tProcess Name\t|\tArrival Time\t|\tService Time\t|\tPriority\t\n");
+		printf("-----------------------------------------------------------------------------------------------\n");
 		while(ptr != NULL) {
 			process *proc = (process *)ptr->data;
-			printf("%10c | %12.1f | %8.1f | %8d |\n",proc->pid,proc->arrival_time,proc->run_time,proc->priority);
+			printf("%10c\t\t|%12.1f\t\t|%8.1f\t\t|%8d\t\t\n",proc->pid,proc->arrival_time,proc->run_time,proc->priority);
 			ptr = ptr->next;
 		}
-		printf("--------------------------------------------------\n");
-		printf("Total No. of Processes : %d\n",processList->size);
-		printf("--------------------------------------------------\n");
+		printf("-----------------------------------------------------------------------------------------------\n\n\n");
 
 		//First Come First Serve scheduling
 		fcfs[ctr] = first_come_first_serve_np(processList);
 		//Round Robin scheduling
 		rr[ctr] = round_robin_p(processList,5);
 		//Shortest Job First scheduling
-		sjf[ctr] = shortest_job_first_np(processList);
+		sjf[ctr] = SJF_scheduler(processList);
 		//Shortest Remaining Time First scheduling
 		srf[ctr] = shortest_remaining_time_p(processList);
 		//Highest Priority First Preemptive scheduling
@@ -99,46 +100,33 @@ int main(int argc,char **argv) {
 			final[i].avg_turnaround /= 5;
 			final[i].avg_throughput /= 5;
 	}
-	printf("\n\n\n");
-	//printf("*****************************************************************************************************************************\n");
-	//printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-	printf("_____________________________________________________________________________________________________________________________\n\n");
-	printf("The average of the 5 runs of all algorithms is as follows:\n");
-	printf("\n");
-	printf("ALGORITHM: FIRST COME FIRST SERVE:\n\n");
-	printf("Average Response Time(RT) : %.1f\n",final[0].avg_response_time);
-	printf("Average Wait Time(WT) : %.1f\n",final[0].avg_wait_time);
-	printf("Average Turn Around Time(TAT) :%.1f\n",final[0].avg_turnaround);
-	printf("Average throughput(tr) :%.1f\n",final[0].avg_throughput);
-	printf("\n");
-	printf("ALGORITHM: ROUND ROBIN PREEMPTIVE:\n\n");
-	printf("Average Response Time(RT) : %.1f\n",final[3].avg_response_time);
-	printf("Average Wait Time(WT) : %.1f\n",final[3].avg_wait_time);
-	printf("Average Turn Around Time(TAT) :%.1f\n",final[3].avg_turnaround);
-	printf("Average throughput(tr) :%.1f\n",final[3].avg_throughput);
-	printf("\n");
-	printf("ALGORITHM: SHORTEST JOB FIRST NON PREEMPTIVE:\n\n");
-	printf("Average Response Time(RT) : %.1f\n",final[1].avg_response_time);
-	printf("Average Wait Time(WT) : %.1f\n",final[1].avg_wait_time);
-	printf("Average Turn Around Time(TAT) :%.1f\n",final[1].avg_turnaround);
-	printf("Average throughput(tr) :%.1f\n",final[1].avg_throughput);
-	printf("\n");
-	printf("ALGORITHM: SHORTEST REMAINING TIME FIRST PREEMPTIVE:\n\n");
-	printf("Average Response Time(RT) : %.1f\n",final[2].avg_response_time);
-	printf("Average Wait Time(WT) : %.1f\n",final[2].avg_wait_time);
-	printf("Average Turn Around Time(TAT) :%.1f\n",final[2].avg_turnaround);
-	printf("Average throughput(tr) :%.1f\n",final[2].avg_throughput);
-	printf("\n");
-	printf("ALGORITHM: HIGHEST PRIORITY FIRST PREEMPTIVE:\n\n");
-	printf("Average Response Time(RT) : %.1f\n",final[4].avg_response_time);
-	printf("Average Wait Time(WT) : %.1f\n",final[4].avg_wait_time);
-	printf("Average Turn Around Time(TAT) :%.1f\n",final[4].avg_turnaround);
-	printf("Average throughput(tr) :%.1f\n",final[4].avg_throughput);
-	printf("\n");
-	printf("ALGORITHM: HIGHEST PRIORITY FIRST NON PREEMPTIVE:\n\n");
-	printf("Average Response Time(RT) : %.1f\n",final[5].avg_response_time);
-	printf("Average Wait Time(WT) : %.1f\n",final[5].avg_wait_time);
-	printf("Average Turn Around Time(TAT) :%.1f\n",final[5].avg_turnaround);
-	printf("Average throughput(tr) :%.1f\n",final[5].avg_throughput);
-	printf("\n");
+
+	printf("\n\n\n\n");
+
+
+	printf("-----------------------------------------------------------------------------------------------------------------------------\n");
+	printf("\n\nStatistics averaged over 5 workloads: Response time = RT, Wait time = WT, Turnaround Time = TAT, Throughput = TR\n");
+
+	printf("-----------------------------------------------------------------------------------------\n");
+	printf("|\tAlgorithm\t|\tRT\t|\tWT\t|\tTAT\t|\tTR\t|\n");
+	printf("-----------------------------------------------------------------------------------------\n");
+
+	printf("|FCFS (Non-Preemptive)\t|");
+	printf("%.1f\t\t|%.1f\t\t|%.1f\t\t|%.1f\t\t|\n",final[0].avg_response_time,final[0].avg_wait_time,final[0].avg_turnaround,final[0].avg_throughput);
+
+	printf("|SJF (Non-Preemptive)\t|");
+	printf("%.1f\t\t|%.1f\t\t|%.1f\t\t|%.1f\t\t|\n",final[1].avg_response_time,final[1].avg_wait_time,final[1].avg_turnaround,final[1].avg_throughput);
+
+	printf("|SRT (Preemptive)\t|");
+	printf("%.1f\t\t|%.1f\t\t|%.1f\t\t|%.1f\t\t|\n",final[2].avg_response_time,final[2].avg_wait_time,final[2].avg_turnaround,final[2].avg_throughput);
+
+	printf("|RR (Preemptive)\t|");
+	printf("%.1f\t\t|%.1f\t\t|%.1f\t\t|%.1f\t\t|\n",final[3].avg_response_time,final[3].avg_wait_time,final[3].avg_turnaround,final[3].avg_throughput);
+
+	printf("|HPF (Non-Preemptive)\t|");
+	printf("%.1f\t\t|%.1f\t\t|%.1f\t\t|%.1f\t\t|\n",final[5].avg_response_time,final[5].avg_wait_time,final[5].avg_turnaround,final[5].avg_throughput);
+
+	printf("|HPF (Preemptive)\t|");
+	printf("%.1f\t\t|%.1f\t\t|%.1f\t\t|%.1f\t\t|\n",final[4].avg_response_time,final[4].avg_wait_time,final[4].avg_turnaround,final[4].avg_throughput);
+	printf("-----------------------------------------------------------------------------------------\n\n");
 }
