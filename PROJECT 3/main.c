@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
         if (pthread_create(&threads[i], NULL, seller, &args[i])) 
         {
-            printf("error creating thread\n");
+            printf("\n Thread Creation Error!!! \n");
         }
     }
 
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     {
         if (pthread_join(threads[i], NULL)) 
         {
-            printf("error joining thread\n");
+            printf("\n Thread is not joining. Error!!! \n");
         }
     }
 }
