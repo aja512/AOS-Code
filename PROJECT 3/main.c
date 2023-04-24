@@ -1,3 +1,8 @@
+/*
+// COEN 383 AOS Project 3
+// File: main.c
+*/
+
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
