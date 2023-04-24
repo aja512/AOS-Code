@@ -1,6 +1,6 @@
 /*
 // COEN 383 AOS Project 3
-File: event.c
+// File: event.c
 */
 
 #include <pthread.h>
