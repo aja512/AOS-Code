@@ -16,7 +16,7 @@ int compare(void * data1, void * data2) {
 	}
 }
 
-linked_list * generate_processes(int n) {
+linked_list * generate_processes(int n, int counter) {
 	linked_list * process_list = create_linked_list();
 	char pid = 'A';
 	unsigned char priority;
@@ -25,7 +25,7 @@ linked_list * generate_processes(int n) {
 
 
    /* Intializes random number generator */
-   srand((unsigned) time(&t));
+   srand((long long)time(NULL) + (long long)counter * 123456789);
 
 	if(process_list == NULL) fprintf(stderr,"Unable to create Linked List\n");
 
@@ -60,6 +60,18 @@ process * create_process(char pid, float arrival_time, float run_time, unsigned 
 	proc->run_time = run_time;
 	proc->priority = priority;
 	return proc;
+}
+
+preemptive_process * create_preemptive_process(process* proc) {
+	preemptive_process * pp = (preemptive_process *) malloc(sizeof(preemptive_process));
+	pp->pid = proc->pid;
+    pp->arrival_time = proc->arrival_time;
+	pp->run_time = proc->run_time;
+	pp->priority = proc->priority; 
+    pp->time_left = 0.0;
+	pp->start_time = 0.0;
+	pp->end_time = 0.0;
+	return pp;
 }
 
 process * get_copy_of_process(process * proc){}
