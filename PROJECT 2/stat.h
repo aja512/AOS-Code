@@ -39,7 +39,7 @@ struct average_stats_s{
 typedef struct average_stats_s average_stats;
 
 average_stats first_come_first_serve_np(linked_list * processes);
-average_stats shortest_job_first_np(linked_list * processes);
+average_stats SJF_scheduler(linked_list * processes);
 average_stats shortest_remaining_time_p(linked_list * processes);
 average_stats round_robin_p(linked_list * processes,int time_slice);
 average_stats highest_priority_first_p(linked_list * processes);
