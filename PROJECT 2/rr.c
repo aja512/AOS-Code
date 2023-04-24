@@ -1,10 +1,17 @@
+/*
+COEN 383 AOS 
+FILE: rr.c
+Group: 1
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "stat.h"
 #include "utility.h"
 
-process_stat * create_process_stat(process* proc);
+process_stat * create_process_stat(process* proc); //structure for creating processes
 
+// main function
 average_stats round_robin_p(linked_list * processes, int time_slice) {
 	int t = 0;
 
