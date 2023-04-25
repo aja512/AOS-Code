@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "customer.h"
+#include "buyer.h"
 
 int customer_comparator(const void *a, const void *b) 
 {
