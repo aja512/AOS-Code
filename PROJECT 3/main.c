@@ -10,7 +10,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "customer.h"
+#include "buyer.h"
 #include "seller.h"
 
 int main(int argc, char *argv[]) 
