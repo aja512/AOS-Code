@@ -1,5 +1,5 @@
-#ifndef CUSTOMER_H
-#define CUSTOMER_H
+#ifndef BUYER_H
+#define BUYER_H
 
 #define MAX_ARRIVAL_TIME 100
 
