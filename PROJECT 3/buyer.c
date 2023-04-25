@@ -1,6 +1,6 @@
 /*
 // COEN 383 AOS Project 3
-// File: customer.c
+// File: buyer.c
 */
 
 #include <stdio.h>
