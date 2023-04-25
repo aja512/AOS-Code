@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "customer.h"
+#include "buyer.h"
 #include "seller.h"
 
 void *seller(void *seller_args) {
