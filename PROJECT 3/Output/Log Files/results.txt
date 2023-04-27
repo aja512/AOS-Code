@@ -1,0 +1,11 @@
+[ {at: 14} {at: 21} {at: 22} {at: 22} {at: 23} {at: 25} {at: 31} {at: 41} {at: 42} {at: 43} ]
+{H} id: 0, priority: 0
+{M1} id: 1, priority: 1
+{M2} id: 2, priority: 1
+{M3} id: 3, priority: 1
+{L1} id: 4, priority: 2
+{L2} id: 5, priority: 2
+{L3} id: 6, priority: 2
+{L4} id: 7, priority: 2
+{L5} id: 8, priority: 2
+{L6} id: 9, priority: 2
