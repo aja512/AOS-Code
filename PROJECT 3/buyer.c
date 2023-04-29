@@ -26,6 +26,7 @@ customer_queue_t *create_customer_queue(int num_customers)
 
     for (int i = 0; i < num_customers; i++) 
     {
+        queue->buf[i].id = i;
         queue->buf[i].arrival_time = rand() % MAX_ARRIVAL_TIME;
     }
 
@@ -39,7 +40,24 @@ void print_customer_queue(customer_queue_t *queue)
     printf("[ ");
     for (int i = 0; i < queue->size; i++) 
     {
-        printf("{at: %d} ", queue->buf[i].arrival_time);
+        printf("{Customer %d arrives at: %d} ", queue->buf[i].id, queue->buf[i].arrival_time);
     }
     printf("]\n");
+}
+
+customer_t dequeue_customer(customer_queue_t *queue) 
+{
+    // remove customer from beginning of queue
+    customer_t current_customer = queue->buf[0];
+    for (int i = 0; i < (int)queue->size - 1; i++) 
+    {
+        queue->buf[i] = queue->buf[i+1];        // shift all customers up in the queue
+    }
+    queue->size = queue->size - 1;
+    return current_customer;
+}
+
+void print_customer(customer_t customer) 
+{
+    printf("[Removed customer id: %d, arrival time: %d]\n", customer.id, customer.arrival_time);
 }
