@@ -1,3 +1,7 @@
+/*
+// Header file assigning priority and defining process id, arrival time, and queue size.
+*/
+
 #ifndef BUYER_H
 #define BUYER_H
 
