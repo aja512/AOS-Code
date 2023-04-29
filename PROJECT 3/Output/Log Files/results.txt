@@ -1,11 +1,82 @@
-[ {at: 14} {at: 21} {at: 22} {at: 22} {at: 23} {at: 25} {at: 31} {at: 41} {at: 42} {at: 43} ]
+Seating chart: 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+
+Initial H queue:  [ {Customer 4 arrives at: 2} {Customer 3 arrives at: 20} {Customer 0 arrives at: 31} {Customer 2 arrives at: 44} {Customer 1 arrives at: 53} ]
+Initial M1 queue: [ {Customer 2 arrives at: 4} {Customer 3 arrives at: 31} {Customer 4 arrives at: 36} {Customer 0 arrives at: 47} {Customer 1 arrives at: 53} ]
+Initial M2 queue: [ {Customer 1 arrives at: 26} {Customer 0 arrives at: 33} {Customer 3 arrives at: 53} {Customer 2 arrives at: 55} {Customer 4 arrives at: 55} ]
+Initial M3 queue: [ {Customer 3 arrives at: 5} {Customer 1 arrives at: 17} {Customer 4 arrives at: 38} {Customer 2 arrives at: 48} {Customer 0 arrives at: 56} ]
+Initial L1 queue: [ {Customer 2 arrives at: 7} {Customer 3 arrives at: 8} {Customer 0 arrives at: 22} {Customer 4 arrives at: 27} {Customer 1 arrives at: 56} ]
+Initial L2 queue: [ {Customer 0 arrives at: 13} {Customer 4 arrives at: 23} {Customer 3 arrives at: 29} {Customer 2 arrives at: 42} {Customer 1 arrives at: 48} ]
+Initial L3 queue: [ {Customer 1 arrives at: 13} {Customer 4 arrives at: 14} {Customer 2 arrives at: 20} {Customer 0 arrives at: 49} {Customer 3 arrives at: 50} ]
+Initial L4 queue: [ {Customer 3 arrives at: 18} {Customer 1 arrives at: 26} {Customer 2 arrives at: 30} {Customer 4 arrives at: 35} {Customer 0 arrives at: 55} ]
+Initial L5 queue: [ {Customer 3 arrives at: 0} {Customer 2 arrives at: 5} {Customer 1 arrives at: 12} {Customer 4 arrives at: 49} {Customer 0 arrives at: 52} ]
+Initial L6 queue: [ {Customer 2 arrives at: 7} {Customer 3 arrives at: 31} {Customer 4 arrives at: 35} {Customer 0 arrives at: 37} {Customer 1 arrives at: 44} ]
+
 {H} id: 0, priority: 0
+[0:02][Removed customer id: 4, arrival time: 2]
+[0:20][Removed customer id: 3, arrival time: 20]
+[0:31][Removed customer id: 0, arrival time: 31]
+[0:44][Removed customer id: 2, arrival time: 44]
+[0:53][Removed customer id: 1, arrival time: 53]
 {M1} id: 1, priority: 1
+[0:04][Removed customer id: 2, arrival time: 4]
+[0:31][Removed customer id: 3, arrival time: 31]
+[0:36][Removed customer id: 4, arrival time: 36]
+[0:47][Removed customer id: 0, arrival time: 47]
+[0:53][Removed customer id: 1, arrival time: 53]
 {M2} id: 2, priority: 1
+[0:26][Removed customer id: 1, arrival time: 26]
+[0:33][Removed customer id: 0, arrival time: 33]
+[0:53][Removed customer id: 3, arrival time: 53]
+[0:55][Removed customer id: 2, arrival time: 55]
 {M3} id: 3, priority: 1
+[0:05][Removed customer id: 3, arrival time: 5]
+[0:17][Removed customer id: 1, arrival time: 17]
+[0:38][Removed customer id: 4, arrival time: 38]
+[0:48][Removed customer id: 2, arrival time: 48]
+[0:56][Removed customer id: 0, arrival time: 56]
 {L1} id: 4, priority: 2
+[0:07][Removed customer id: 2, arrival time: 7]
+[0:08][Removed customer id: 3, arrival time: 8]
+[0:22][Removed customer id: 0, arrival time: 22]
+[0:27][Removed customer id: 4, arrival time: 27]
+[0:56][Removed customer id: 1, arrival time: 56]
 {L2} id: 5, priority: 2
+[0:13][Removed customer id: 0, arrival time: 13]
+[0:23][Removed customer id: 4, arrival time: 23]
+[0:29][Removed customer id: 3, arrival time: 29]
+[0:42][Removed customer id: 2, arrival time: 42]
+[0:48][Removed customer id: 1, arrival time: 48]
 {L3} id: 6, priority: 2
+[0:13][Removed customer id: 1, arrival time: 13]
+[0:14][Removed customer id: 4, arrival time: 14]
+[0:20][Removed customer id: 2, arrival time: 20]
+[0:49][Removed customer id: 0, arrival time: 49]
+[0:50][Removed customer id: 3, arrival time: 50]
 {L4} id: 7, priority: 2
+[0:18][Removed customer id: 3, arrival time: 18]
+[0:26][Removed customer id: 1, arrival time: 26]
+[0:30][Removed customer id: 2, arrival time: 30]
+[0:35][Removed customer id: 4, arrival time: 35]
+[0:55][Removed customer id: 0, arrival time: 55]
 {L5} id: 8, priority: 2
+[0:00][Removed customer id: 3, arrival time: 0]
+[0:05][Removed customer id: 2, arrival time: 5]
+[0:12][Removed customer id: 1, arrival time: 12]
+[0:49][Removed customer id: 4, arrival time: 49]
+[0:52][Removed customer id: 0, arrival time: 52]
 {L6} id: 9, priority: 2
+[0:07][Removed customer id: 2, arrival time: 7]
+[0:31][Removed customer id: 3, arrival time: 31]
+[0:35][Removed customer id: 4, arrival time: 35]
+[0:37][Removed customer id: 0, arrival time: 37]
+[0:44][Removed customer id: 1, arrival time: 44]
