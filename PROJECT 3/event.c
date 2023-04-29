@@ -10,7 +10,7 @@
 
 #include "event.h"
 
-
+// Structure for defining the event (Linked List)
 struct node 
 {
     event_t event;
@@ -33,12 +33,13 @@ struct event_pool
     bool printer_stop;
 };
 
-
+// Print the events
 void event_print(event_t event) 
 {
 
 }
 
+// Print the event pool in real-time
 void* real_time_printer(void *event_pool) 
 {
     struct event_pool *pool = (struct event_pool*)event_pool;
