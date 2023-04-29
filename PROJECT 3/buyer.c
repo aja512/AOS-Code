@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "buyer.h"
 
+// Compares customers based on priority and arrival time
 int customer_comparator(const void *a, const void *b) 
 {
     customer_t *cust_a = (customer_t *) a;
@@ -15,6 +16,7 @@ int customer_comparator(const void *a, const void *b)
     return cust_a->arrival_time - cust_b->arrival_time;
 }
 
+// Creates Queues for handling customers
 customer_queue_t *create_customer_queue(int num_customers) 
 {
     size_t customer_t_sz = sizeof(customer_t);
@@ -35,6 +37,7 @@ customer_queue_t *create_customer_queue(int num_customers)
     return queue;
 }
 
+// Print the queues
 void print_customer_queue(customer_queue_t *queue) 
 {
     printf("[ ");
@@ -45,6 +48,7 @@ void print_customer_queue(customer_queue_t *queue)
     printf("]\n");
 }
 
+// Empty the queue after usage
 customer_t dequeue_customer(customer_queue_t *queue) 
 {
     // remove customer from beginning of queue
@@ -57,6 +61,7 @@ customer_t dequeue_customer(customer_queue_t *queue)
     return current_customer;
 }
 
+// Print the removed customer from the queue
 void print_customer(customer_t customer) 
 {
     printf("[Removed customer id: %d, arrival time: %d]\n", customer.id, customer.arrival_time);
