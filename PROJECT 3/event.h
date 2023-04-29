@@ -2,8 +2,8 @@
 Header files for handling events: Arrival, Inform, Leaving
 */
 
-#ifndef COEN383_P3_EVENT_H
-#define COEN383_P3_EVENT_H
+#ifndef EVENT_H
+#define EVENT_H
 
 typedef enum {
     Arrived,
