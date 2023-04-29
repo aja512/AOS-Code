@@ -13,14 +13,19 @@
 #include "buyer.h"
 #include "seller.h"
 
-typedef struct {
+
+// Structure for defining thr seat status, seller info, and customer id.
+typedef struct 
+{
     int occupied;
     char seller_type;
     int seller_id;
     int customer_id;
 } chart_struct;
 
-void print_seat_chart(chart_struct chart[][10]) {
+// Function for printing the seating arrangement
+void print_seat_chart(chart_struct chart[][10]) 
+{
     printf("Seating chart: \n");
     for (int i = 0; i < 10; i++)
     {
@@ -36,6 +41,7 @@ void print_seat_chart(chart_struct chart[][10]) {
     printf("\n");
 }
 
+// Main Function
 int main(int argc, char *argv[]) 
 {   
     srand(time(NULL));
