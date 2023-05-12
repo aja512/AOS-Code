@@ -1,6 +1,8 @@
-//
+/*
+// COEN 383 AOS Project 4
 // File: policy.c
-//
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
