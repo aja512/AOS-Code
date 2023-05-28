@@ -33,37 +33,45 @@ struct timeval start_t;
 struct itimerval timer;
 time_t start;
 
-void readPipe(int* pd,int pipeEnd, int pipe){
-	if(!timeout){
+void readPipe(int* pd,int pipeEnd, int pipe)
+{
+	if(!timeout)
+	{
 		close(pd[WRITE_END]);
 
 		struct timeval curr_time;
-        gettimeofday(&curr_time, NULL);
-        float current_read_time = (float)((curr_time.tv_sec - start_t.tv_sec) + ((curr_time.tv_usec - start_t.tv_usec)/1000000.));
+        	gettimeofday(&curr_time, NULL);
+        	float current_read_time = (float)((curr_time.tv_sec - start_t.tv_sec) + ((curr_time.tv_usec - start_t.tv_usec)/1000000.));
         
-        read(pipeEnd, buffer, BUFFER_SIZE);
-        if (pipe == 4){
+        	read(pipeEnd, buffer, BUFFER_SIZE);
+        	if (pipe == 4)
+		{
 			fprintf(output, "%6.3f %s", current_read_time, buffer);
-        } else{
-       		fprintf(output, "%6.3f %s\n", current_read_time, buffer);
-        }
+       	 	} else
+		{
+       			fprintf(output, "%6.3f %s\n", current_read_time, buffer);
+        	}
 	}
 }
 
-void writePipe(int* pd){
-	if(!timeout){
+void writePipe(int* pd)
+{
+	if(!timeout)
+	{
 		close(pd[READ_END]);
 		write(pd[WRITE_END], buffer, BUFFER_SIZE);
 	}
 }
 
-void interruptHandler(int signal){
+void interruptHandler(int signal)
+{
 	assert(signal == SIGALRM);
 	timeout = 1;
 	exit(0);
 }
 
-int main(){
+int main()
+{
 	output = fopen("output.txt", "w");
 
 	time(&start); //get start time
@@ -73,16 +81,18 @@ int main(){
 	gettimeofday(&start_t, NULL);
 	signal(SIGALRM, interruptHandler);
 	srand(time(NULL));
-    int seed;
+    	int seed;
 
 	FD_ZERO(&input_fd);
 
 	int i, pipeNumber;
 	pid_t pid;
 
-	for(i = 0; i < NUM_PIPES; i++){
-        seed = rand();
-		if(pipe(fd[i]) == -1) {
+	for(i = 0; i < NUM_PIPES; i++)
+	{
+       	 	seed = rand();
+		if(pipe(fd[i]) == -1) 
+		{
 			perror("Pipe error");
 			exit(1);
 		}
@@ -90,50 +100,62 @@ int main(){
 		FD_SET(fd[i][READ_END], &input_fd);
 		
 		pid = fork();
-		if(pid  == -1) {
+		if(pid  == -1) 
+		{
 			perror("Fork error");
 			exit(1);
 		}
 
-		if(pid == 0) {
+		if(pid == 0) 
+		{
 			fflush(stdout);
-            // different child now has different random seed
-            srand(seed);
+            		// different child now has different random seed
+            		srand(seed);
 			break;
 		}
 
 	}
 
-	while(!timeout){
+	while(!timeout)
+	{
 
 		//Parent Process
-		if(pid > 0){
+		if(pid > 0)
+		{
 			input = input_fd;
 
 			pipeNumber = select(FD_SETSIZE, &input, NULL, NULL, NULL);
-			if(pipeNumber < 0){
+			if(pipeNumber < 0)
+			{
 				perror("Pipe Number error");
 				exit(1);
-			} else if (pipeNumber == 0){
-                // should not be here, since the timeout parameter is NULL
+			} else if (pipeNumber == 0)
+			{
+                		// should not be here, since the timeout parameter is NULL
 				perror("Nothing to read");
-			} else{
-				for(i = 0; i < NUM_PIPES; i++){
-					if(FD_ISSET(fd[i][READ_END], &input)) {
+			} else
+			{
+				for(i = 0; i < NUM_PIPES; i++)
+				{
+					if(FD_ISSET(fd[i][READ_END], &input)) 
+					{
 						readPipe(fd[i],fd[i][READ_END], i);
 					}
 				}
 			}
-		} else{ // Child Process
+		} else
+		{ // Child Process
 			input = input_fd;
 
-			if(i == 4) {
-                printf("Child 5 => ");
+			if(i == 4) 
+			{
+                		printf("Child 5 => ");
 				fgets(terminal_input, BUFFER_SIZE, stdin);
 				snprintf(buffer, BUFFER_SIZE, "User Input: %s", terminal_input);
 				writePipe(fd[i]);
 			}
-			else { 
+			else 
+			{ 
 				snprintf(buffer, BUFFER_SIZE, "Child: %d Message: %d", i, message_count++);
 				writePipe(fd[i]);
 				sleep(rand() % 3);
@@ -142,6 +164,6 @@ int main(){
 		} 
 
 	}
-    fclose(output);
+    	fclose(output);
 	exit(0);
 }
