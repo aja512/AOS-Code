@@ -47,7 +47,8 @@ void readPipe(int* pd,int pipeEnd, int pipe)
         	if (pipe == 4)
 		{
 			fprintf(output, "%6.3f %s", current_read_time, buffer);
-       	 	} else
+       	 	} 
+		else
 		{
        			fprintf(output, "%6.3f %s\n", current_read_time, buffer);
         	}
@@ -129,11 +130,13 @@ int main()
 			{
 				perror("Pipe Number error");
 				exit(1);
-			} else if (pipeNumber == 0)
+			} 
+			else if (pipeNumber == 0)
 			{
                 		// should not be here, since the timeout parameter is NULL
 				perror("Nothing to read");
-			} else
+			} 
+			else
 			{
 				for(i = 0; i < NUM_PIPES; i++)
 				{
@@ -143,7 +146,8 @@ int main()
 					}
 				}
 			}
-		} else
+		} 
+		else
 		{ // Child Process
 			input = input_fd;
 
@@ -151,12 +155,12 @@ int main()
 			{
                 		printf("Child 5 => ");
 				fgets(terminal_input, BUFFER_SIZE, stdin);
-				snprintf(buffer, BUFFER_SIZE, "User Input: %s", terminal_input);
+				snprintf(buffer, BUFFER_SIZE, "User Input: %s", terminal_input) < 0 ? abort(): (void)0;
 				writePipe(fd[i]);
 			}
 			else 
 			{ 
-				snprintf(buffer, BUFFER_SIZE, "Child: %d Message: %d", i, message_count++);
+				snprintf(buffer, BUFFER_SIZE, "Child: %d Message: %d", i, message_count++) < 0 ? abort(): (void)0;;
 				writePipe(fd[i]);
 				sleep(rand() % 3);
 				
