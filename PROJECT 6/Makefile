@@ -1,16 +1,19 @@
-CC=gcc
-CFLAGS=-std=c99
-CMD=$(CC) $(CFLAGS)
+CXX			:= gcc
+CXXFLAGS	:= -Wall -O3
+OBJ_DIR		:= obj/
+BIN_DIR		:= bin/
+VPATH		:= src:${OBJ_DIR}
 
-COMPILE=$(CMD) -g -c 
-
-FILES=pipes.o 
-
-all: pipes.o
-	$(CMD) $(FILES) -g -o app.bin
+pipes: pipes.o
+	@mkdir -p $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) -o $(BIN_DIR)$@ $(OBJ_DIR)$@.o
+.PHONY: pipes
 
 clean:
-	rm *.o app.bin
+	@rm -rf $(BIN_DIR)
+	@rm -rf $(OBJ_DIR)
+.PHONY: clean
 
-pipes.o: pipes.c
-	$(COMPILE) pipes.c
+%.o: %.c
+	@mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c -o $(OBJ_DIR)$@ $<
