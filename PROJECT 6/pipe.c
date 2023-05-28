@@ -160,7 +160,7 @@ int main()
 			}
 			else 
 			{ 
-				snprintf(buffer, BUFFER_SIZE, "Child: %d Message: %d", i, message_count++) < 0 ? abort(): (void)0;;
+				snprintf(buffer, BUFFER_SIZE, "Child: %d Message: %d", i, message_count++) < 0 ? abort(): (void)0;
 				writePipe(fd[i]);
 				sleep(rand() % 3);
 				
