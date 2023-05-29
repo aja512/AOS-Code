@@ -1,0 +1,248 @@
+Seating chart: 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+
+Initial H queue:  [ {Customer 0 arrives at: 0} {Customer 1 arrives at: 6} {Customer 3 arrives at: 23} {Customer 4 arrives at: 50} {Customer 2 arrives at: 55} ]
+Initial M1 queue: [ {Customer 3 arrives at: 11} {Customer 2 arrives at: 16} {Customer 0 arrives at: 24} {Customer 4 arrives at: 53} {Customer 1 arrives at: 57} ]
+Initial M2 queue: [ {Customer 2 arrives at: 9} {Customer 1 arrives at: 36} {Customer 4 arrives at: 37} {Customer 0 arrives at: 55} {Customer 3 arrives at: 56} ]
+Initial M3 queue: [ {Customer 0 arrives at: 11} {Customer 3 arrives at: 13} {Customer 4 arrives at: 18} {Customer 1 arrives at: 19} {Customer 2 arrives at: 39} ]
+Initial L1 queue: [ {Customer 0 arrives at: 9} {Customer 3 arrives at: 31} {Customer 2 arrives at: 34} {Customer 1 arrives at: 38} {Customer 4 arrives at: 41} ]
+Initial L2 queue: [ {Customer 2 arrives at: 14} {Customer 1 arrives at: 41} {Customer 0 arrives at: 45} {Customer 3 arrives at: 49} {Customer 4 arrives at: 54} ]
+Initial L3 queue: [ {Customer 2 arrives at: 0} {Customer 4 arrives at: 4} {Customer 3 arrives at: 28} {Customer 0 arrives at: 33} {Customer 1 arrives at: 49} ]
+Initial L4 queue: [ {Customer 0 arrives at: 42} {Customer 1 arrives at: 44} {Customer 3 arrives at: 50} {Customer 2 arrives at: 53} {Customer 4 arrives at: 55} ]
+Initial L5 queue: [ {Customer 2 arrives at: 24} {Customer 4 arrives at: 33} {Customer 1 arrives at: 37} {Customer 0 arrives at: 39} {Customer 3 arrives at: 48} ]
+Initial L6 queue: [ {Customer 1 arrives at: 0} {Customer 0 arrives at: 1} {Customer 4 arrives at: 13} {Customer 3 arrives at: 40} {Customer 2 arrives at: 44} ]
+
+[0:00] L3 seller has customer L302 arrive
+[0:00] L3 Serving customer L302 
+[0:06] L302 customer assigned seat 0 in row 9, service time of 6 minutes
+
+[0:00] L6 seller has customer L601 arrive
+[0:00] L6 Serving customer L601 
+[0:06] L601 customer assigned seat 1 in row 9, service time of 6 minutes
+
+[0:00] H0 seller has customer H000 arrive
+[0:00] H0 Serving customer H000 
+[0:02] H000 customer assigned seat 0 in row 0, service time of 2 minutes
+
+[0:04] L3 seller has customer L304 arrive
+[0:06] L3 Serving customer L304 
+[0:11] L304 customer assigned seat 2 in row 9, service time of 5 minutes
+
+[0:01] L6 seller has customer L600 arrive
+[0:06] L6 Serving customer L600 
+[0:11] L600 customer assigned seat 3 in row 9, service time of 5 minutes
+
+[0:13] L6 seller has customer L604 arrive
+[0:13] L6 Serving customer L604 
+[0:17] L604 customer assigned seat 4 in row 9, service time of 4 minutes
+
+[0:06] H0 seller has customer H001 arrive
+[0:06] H0 Serving customer H001 
+[0:07] H001 customer assigned seat 1 in row 0, service time of 1 minutes
+
+[0:09] L1 seller has customer L100 arrive
+[0:09] L1 Serving customer L100 
+[0:15] L100 customer assigned seat 5 in row 9, service time of 6 minutes
+
+[0:09] M2 seller has customer M202 arrive
+[0:09] M2 Serving customer M202 
+[0:11] M202 customer assigned seat 0 in row 4, service time of 2 minutes
+
+[0:11] M3 seller has customer M300 arrive
+[0:11] M3 Serving customer M300 
+[0:13] M300 customer assigned seat 1 in row 4, service time of 2 minutes
+
+[0:11] M1 seller has customer M103 arrive
+[0:11] M1 Serving customer M103 
+[0:14] M103 customer assigned seat 2 in row 4, service time of 3 minutes
+
+[0:13] M3 seller has customer M303 arrive
+[0:13] M3 Serving customer M303 
+[0:15] M303 customer assigned seat 3 in row 4, service time of 2 minutes
+
+[0:14] L2 seller has customer L202 arrive
+[0:14] L2 Serving customer L202 
+[0:18] L202 customer assigned seat 6 in row 9, service time of 4 minutes
+
+[0:16] M1 seller has customer M102 arrive
+[0:16] M1 Serving customer M102 
+[0:20] M102 customer assigned seat 4 in row 4, service time of 4 minutes
+
+[0:18] M3 seller has customer M304 arrive
+[0:18] M3 Serving customer M304 
+[0:20] M304 customer assigned seat 5 in row 4, service time of 2 minutes
+
+[0:19] M3 seller has customer M301 arrive
+[0:20] M3 Serving customer M301 
+[0:22] M301 customer assigned seat 6 in row 4, service time of 2 minutes
+
+[0:28] L3 seller has customer L303 arrive
+[0:28] L3 Serving customer L303 
+[0:35] L303 customer assigned seat 7 in row 9, service time of 7 minutes
+
+[0:24] M1 seller has customer M100 arrive
+[0:24] M1 Serving customer M100 
+[0:26] M100 customer assigned seat 7 in row 4, service time of 2 minutes
+
+[0:33] L3 seller has customer L300 arrive
+[0:35] L3 Serving customer L300 
+[0:41] L300 customer assigned seat 8 in row 9, service time of 6 minutes
+
+[0:23] H0 seller has customer H003 arrive
+[0:23] H0 Serving customer H003 
+[0:25] H003 customer assigned seat 2 in row 0, service time of 2 minutes
+
+[0:24] L5 seller has customer L502 arrive
+[0:24] L5 Serving customer L502 
+[0:28] L502 customer assigned seat 9 in row 9, service time of 4 minutes
+
+[0:31] L1 seller has customer L103 arrive
+[0:31] L1 Serving customer L103 
+[0:36] L103 customer assigned seat 0 in row 8, service time of 5 minutes
+
+[0:34] L1 seller has customer L102 arrive
+[0:36] L1 Serving customer L102 
+[0:43] L102 customer assigned seat 1 in row 8, service time of 7 minutes
+
+[0:40] L6 seller has customer L603 arrive
+[0:40] L6 Serving customer L603 
+[0:44] L603 customer assigned seat 2 in row 8, service time of 4 minutes
+
+[0:38] L1 seller has customer L101 arrive
+[0:43] L1 Serving customer L101 
+[0:48] L101 customer assigned seat 3 in row 8, service time of 5 minutes
+
+[0:49] L3 seller has customer L301 arrive
+[0:49] L3 Serving customer L301 
+[0:53] L301 customer assigned seat 4 in row 8, service time of 4 minutes
+
+[0:44] L6 seller has customer L602 arrive
+[0:44] L6 Serving customer L602 
+[0:49] L602 customer assigned seat 5 in row 8, service time of 5 minutes
+
+[0:41] L1 seller has customer L104 arrive
+[0:48] L1 Serving customer L104 
+[0:53] L104 customer assigned seat 6 in row 8, service time of 5 minutes
+
+[0:33] L5 seller has customer L504 arrive
+[0:33] L5 Serving customer L504 
+[0:38] L504 customer assigned seat 7 in row 8, service time of 5 minutes
+
+[0:37] L5 seller has customer L501 arrive
+[0:38] L5 Serving customer L501 
+[0:43] L501 customer assigned seat 8 in row 8, service time of 5 minutes
+
+[0:39] L5 seller has customer L500 arrive
+[0:43] L5 Serving customer L500 
+[0:50] L500 customer assigned seat 9 in row 8, service time of 7 minutes
+
+[0:48] L5 seller has customer L503 arrive
+[0:50] L5 Serving customer L503 
+[0:57] L503 customer assigned seat 0 in row 7, service time of 7 minutes
+
+[0:39] M3 seller has customer M302 arrive
+[0:39] M3 Serving customer M302 
+[0:42] M302 customer assigned seat 8 in row 4, service time of 3 minutes
+
+[0:36] M2 seller has customer M201 arrive
+[0:36] M2 Serving customer M201 
+[0:40] M201 customer assigned seat 9 in row 4, service time of 4 minutes
+
+[0:37] M2 seller has customer M204 arrive
+[0:40] M2 Serving customer M204 
+[0:42] M204 customer assigned seat 0 in row 5, service time of 2 minutes
+
+[0:41] L2 seller has customer L201 arrive
+[0:41] L2 Serving customer L201 
+[0:46] L201 customer assigned seat 1 in row 7, service time of 5 minutes
+
+[0:45] L2 seller has customer L200 arrive
+[0:46] L2 Serving customer L200 
+[0:53] L200 customer assigned seat 2 in row 7, service time of 7 minutes
+
+[0:49] L2 seller has customer L203 arrive
+[0:53] L2 Serving customer L203 
+[1:00] L203 customer assigned seat 3 in row 7, service time of 7 minutes
+
+L2 Ticket sale ended, customer L204 that arrived at [0:54] leaves
+[0:42] L4 seller has customer L400 arrive
+[0:42] L4 Serving customer L400 
+[0:49] L400 customer assigned seat 4 in row 7, service time of 7 minutes
+
+[0:44] L4 seller has customer L401 arrive
+[0:49] L4 Serving customer L401 
+[0:54] L401 customer assigned seat 5 in row 7, service time of 5 minutes
+
+[0:50] L4 seller has customer L403 arrive
+[0:54] L4 Serving customer L403 
+[1:00] L403 customer assigned seat 6 in row 7, service time of 6 minutes
+
+L4 Ticket sale ended, customer L402 that arrived at [0:53] leaves
+L4 Ticket sale ended, customer L404 that arrived at [0:55] leaves
+[0:53] M1 seller has customer M104 arrive
+[0:53] M1 Serving customer M104 
+[0:56] M104 customer assigned seat 1 in row 5, service time of 3 minutes
+
+[0:50] H0 seller has customer H004 arrive
+[0:50] H0 Serving customer H004 
+[0:52] H004 customer assigned seat 3 in row 0, service time of 2 minutes
+
+[0:57] M1 seller has customer M101 arrive
+[0:57] M1 Serving customer M101 
+[0:59] M101 customer assigned seat 2 in row 5, service time of 2 minutes
+
+[0:55] M2 seller has customer M200 arrive
+[0:55] M2 Serving customer M200 
+[0:57] M200 customer assigned seat 3 in row 5, service time of 2 minutes
+
+[0:56] M2 seller has customer M203 arrive
+[0:57] M2 Serving customer M203 
+[0:59] M203 customer assigned seat 4 in row 5, service time of 2 minutes
+
+[0:55] H0 seller has customer H002 arrive
+[0:55] H0 Serving customer H002 
+[0:57] H002 customer assigned seat 4 in row 0, service time of 2 minutes
+
+
+Seating chart: 
+H000 H001 H003 H004 H002 - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+M202 M300 M103 M303 M102 M304 M301 M100 M302 M201 
+M204 M104 M101 M200 M203 - - - - - 
+- - - - - - - - - - 
+L503 L201 L200 L203 L400 L401 L403 - - - 
+L103 L102 L603 L101 L301 L602 L104 L504 L501 L500 
+L302 L601 L304 L600 L604 L100 L202 L303 L300 L502 
+
+
+Statistics for high-priced sellers:
+Turnaround Time: 9
+Total Response Time: 0
+Average Response Time: 0.000000
+Throughput: 5
+Average Turnaround Time: 1.800000
+
+Statistics for medium-priced sellers:
+Turnaround Time: 42
+Total Response Time: 5
+Average Response Time: 0.333333
+Throughput: 15
+Average Turnaround Time: 2.800000
+
+Statistics for low-priced sellers:
+Turnaround Time: 193
+Total Response Time: 44
+Average Response Time: 1.629630
+Throughput: 27
+Average Turnaround Time: 7.148148
