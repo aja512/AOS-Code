@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include "buyer.h"
 
-// Compares customers based on priority and arrival time
 int customer_comparator(const void *a, const void *b) 
 {
     customer_t *cust_a = (customer_t *) a;
@@ -16,7 +15,6 @@ int customer_comparator(const void *a, const void *b)
     return cust_a->arrival_time - cust_b->arrival_time;
 }
 
-// Creates Queues for handling customers
 customer_queue_t *create_customer_queue(int num_customers) 
 {
     size_t customer_t_sz = sizeof(customer_t);
@@ -37,7 +35,13 @@ customer_queue_t *create_customer_queue(int num_customers)
     return queue;
 }
 
-// Print the queues
+
+int size(customer_queue_t *queue) 
+{
+    // get customer queue size
+    return queue->size;
+}
+
 void print_customer_queue(customer_queue_t *queue) 
 {
     printf("[ ");
@@ -48,7 +52,6 @@ void print_customer_queue(customer_queue_t *queue)
     printf("]\n");
 }
 
-// Empty the queue after usage
 customer_t dequeue_customer(customer_queue_t *queue) 
 {
     // remove customer from beginning of queue
@@ -61,8 +64,12 @@ customer_t dequeue_customer(customer_queue_t *queue)
     return current_customer;
 }
 
-// Print the removed customer from the queue
-void print_customer(customer_t customer) 
+void print_customer(customer_t customer, char seller_type, int sellerId) 
 {
-    printf("[Removed customer id: %d, arrival time: %d]\n", customer.id, customer.arrival_time);
+
+    int hour = customer.arrival_time/60;
+    int ten = customer.arrival_time/10;
+    int min = customer.arrival_time%10;
+    printf("[%d:%d%d] %c%d seller has customer %c%d%02d arrive\n",hour,ten, min ,seller_type,sellerId,
+           seller_type,sellerId, customer.id);
 }
