@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm results.txt
-gcc -o main *.c
-./main > results.txt
+rm $2
+gcc -o main *.c -pthread
+./main $1 > $2
