@@ -7,21 +7,18 @@
 
 #define MAX_ARRIVAL_TIME 60
 
-typedef enum 
-{
+typedef enum {
     HIGH_PRIORITY,
     MEDIUM_PRIORITY,
     LOW_PRIORITY
 } priority_t;
 
-typedef struct 
-{
+typedef struct {
     int id;
     int arrival_time;
 } customer_t;
 
-typedef struct 
-{
+typedef struct {
     size_t size;
     customer_t *buf;
 } customer_queue_t;
@@ -30,6 +27,7 @@ customer_queue_t *create_customer_queue(int num_customers);
 void print_customer_queue(customer_queue_t *queue);
 
 customer_t dequeue_customer(customer_queue_t *queue);
-void print_customer(customer_t customer);
+void print_customer(customer_t customer, char seller_type, int sellerId);
+int size(customer_queue_t *queue);
 
 #endif
