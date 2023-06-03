@@ -14,6 +14,7 @@
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/select.h>
+#include <math.h>
 
 // Setting the limits
 #define BUFFER_SIZE		100
@@ -34,25 +35,6 @@ struct timeval start_t;
 struct itimerval timer;
 time_t start;
 
-int timeval_subtract (struct timeval *result, struct timeval *x,struct timeval  *y)  
-{  
-	if (x->tv_usec < y->tv_usec) {  
-		int nsec = (y->tv_usec - x->tv_usec) / 1000000 + 1;  
-		y->tv_usec -= 1000000 * nsec;  
-		y->tv_sec += nsec;  
-	}  
-	if (x->tv_usec - y->tv_usec > 1000000) {  
-		int nsec = (y->tv_usec - x->tv_usec) / 1000000;  
-		y->tv_usec += 1000000 * nsec;  
-		y->tv_sec -= nsec;  
-	}  
-	 
-	result->tv_sec = x->tv_sec - y->tv_sec;  
-	result->tv_usec = x->tv_usec - y->tv_usec;  
-	
-	return x->tv_sec < y->tv_sec;  
-}
-
 void readPipe(int* pd,int pipeEnd, int pipe)
 {
 	if(!timeout)
@@ -62,20 +44,20 @@ void readPipe(int* pd,int pipeEnd, int pipe)
 		struct timeval curr_time;
         gettimeofday(&curr_time, NULL);
 
-		struct timeval diff;
-		int result;
-		result = timeval_subtract(&diff, &curr_time, &start_t);
+		int current_read_time_sec = (int)(curr_time.tv_sec - start_t.tv_sec);
+		float current_read_time_msec = (float)(curr_time.tv_usec - start_t.tv_usec);
 
-		int current_read_time_sec = (int)(diff.tv_sec);
-		float current_read_time_msec = (float)(diff.tv_usec/1000.);
+		if((current_read_time_msec < 0)) {
+			current_read_time_sec -= 1;
+		}
         
         read(pipeEnd, buffer, BUFFER_SIZE);
         if (pipe == 4)
         {
-			    fprintf(output, "%d:%06.3f %s", current_read_time_sec, current_read_time_msec, buffer);
+			    fprintf(output, "%d:%06.3f %s", current_read_time_sec, fabs(current_read_time_msec/1000.), buffer);
         } else
         {
-       		fprintf(output, "%d:%06.3f %s\n", current_read_time_sec, current_read_time_msec, buffer);
+       		fprintf(output, "%d:%06.3f %s\n", current_read_time_sec, fabs(current_read_time_msec/1000.), buffer);
         }
 	}
 }
@@ -145,6 +127,7 @@ int main()
 	while(!timeout)
   {
 
+	// Terminate
 	//Parent Process
 	if(pid > 0)
     {
@@ -173,16 +156,26 @@ int main()
     { // Child Process
 			input = input_fd;
 
+			struct timeval curr_time_ch;
+			gettimeofday(&curr_time_ch, NULL);
+
+			int current_read_time_sec_ch = (int)(curr_time_ch.tv_sec - start_t.tv_sec);
+			float current_read_time_msec_ch = (float)(curr_time_ch.tv_usec - start_t.tv_usec);
+
+			if((current_read_time_msec_ch < 0)) {
+				current_read_time_sec_ch -= 1;
+			}
+
 			if(i == 4) 
       {
         	printf("Child 5 => ");
 				fgets(terminal_input, TERMINAL_BUFFER_SIZE, stdin);
-				snprintf(buffer, BUFFER_SIZE, "Child 5: %s", terminal_input);
+				snprintf(buffer, BUFFER_SIZE, "Child 5: %d:%06.3f %s", current_read_time_sec_ch, fabs(current_read_time_msec_ch/1000.), terminal_input);
 				writePipe(fd[i]);
 			}
 			else 
       { 
-				snprintf(buffer, BUFFER_SIZE, "Child %d: %d", i+1, message_count++);
+				snprintf(buffer, BUFFER_SIZE, "Child %d: %d:%06.3f %d", i+1, current_read_time_sec_ch, fabs(current_read_time_msec_ch/1000.), message_count++);
 				writePipe(fd[i]);
 				sleep(rand() % 3);
 				
